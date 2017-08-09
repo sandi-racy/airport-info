@@ -47,11 +47,11 @@
               <p>Notification</p>
               <div class="col s12">
                 <p>
-                  <input type="checkbox" id="sms" />
+                  <input class="with-gap" name="group" type="radio" id="sms" />
                   <label for="sms">SMS</label>
                 </p>
                 <p>
-                  <input type="checkbox" id="notif" />
+                  <input class="with-gap" name="group" type="radio" id="notif" />
                   <label for="notif">Notification</label>
                 </p>
               </div>
