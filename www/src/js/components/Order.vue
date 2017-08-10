@@ -29,15 +29,15 @@
               <p>Categories</p>
               <div class="col s12">
                 <p>
-                  <input type="radio" value="1" name="category" id="transportation" v-model="order.category" />
+                  <input type="radio" value="1" name="category_id" id="transportation" v-model="order.category_id" />
                   <label for="transportation">Transportation</label>
                 </p>
                 <p>
-                  <input type="radio" value="2" name="category" id="food-beverage" v-model="order.category" />
+                  <input type="radio" value="2" name="category_id" id="food-beverage" v-model="order.category_id" />
                   <label for="food-beverage">Food and Beverage</label>
                 </p>
                 <p>
-                  <input type="radio" value="3" name="category" id="bank" v-model="order.category" />
+                  <input type="radio" value="3" name="category_id" id="bank" v-model="order.category_id" />
                   <label for="bank">Bank</label>
                 </p>
               </div>
@@ -73,7 +73,7 @@
         data() {
             return {
                 order: {
-                    category: null,
+                    category_id: null,
                     fb_uid: null,
                     flight_number: null,
                     notification: null,
@@ -87,8 +87,11 @@
 
         methods: {
             submit() {
-                this.$http.get(ai.api.url + 'getschedule', this.order).then(() => {
-                    alert('x')
+                this.$http.post(ai.api.url + 'getschedule', this.order).then((response) => {
+                    let statusCode = response.body.status
+                    if (statusCode == 200) {
+                        this.$router.push('view')
+                    }
                 }, () => {
                     alert('Unable to save')
                 })
