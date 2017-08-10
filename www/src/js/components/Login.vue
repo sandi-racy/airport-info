@@ -31,8 +31,11 @@
         methods: {
             doLogin() {
                 this.$http.post(ai.api.url + 'signin', this.login.data).then(() => {
-                    localStorage.setItem('fb_uid', this.login.data.fb_uid)
-                    this.$router.push('order')
+                    localStorage.setItem('fbUid', this.login.data.fb_uid)
+                    localStorage.setItem('userName', this.login.data.name)
+                    setTimeout(() => {
+                        this.$router.push('order')
+                    }, 2000)
                 }, () => {
                     alert('Can\'t login to Facebook')
                 })
@@ -40,7 +43,7 @@
         },
 
         mounted() {
-            if (localStorage.getItem('fb_uid')) {
+            if (localStorage.getItem('fbUid')) {
                 this.$router.push('order')
             }
         }

@@ -7,21 +7,21 @@
       </div>
       <div class="sign-up">
         <div class="row">
-          <form class="col s12">
+          <form class="col s12" @submit.prevent="submit">
             <div class="sign-up__name">
-              <h2>Hi, Muslim Al Fatih</h2>
+              <h2>Hi, {{ user.name }}</h2>
               <p>Please enter your data</p>
             </div>
 
             <div class="row">
               <div class="input-field col s12">
-                <input id="phone" type="number" class="validate">
+                <input id="phone" type="number" class="validate" v-model="order.phone_number">
                 <label for="phone">Phone Number</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field col s12">
-                <input id="flight" type="text" class="validate">
+                <input id="flight" type="text" class="validate" v-model="order.flight_number">
                 <label for="flight">Flight Number</label>
               </div>
             </div>
@@ -29,15 +29,15 @@
               <p>Categories</p>
               <div class="col s12">
                 <p>
-                  <input type="checkbox" id="transportation" />
+                  <input type="radio" value="1" name="category" id="transportation" v-model="order.category" />
                   <label for="transportation">Transportation</label>
                 </p>
                 <p>
-                  <input type="checkbox" id="food-beverage" />
+                  <input type="radio" value="2" name="category" id="food-beverage" v-model="order.category" />
                   <label for="food-beverage">Food and Beverage</label>
                 </p>
                 <p>
-                  <input type="checkbox" id="bank" />
+                  <input type="radio" value="3" name="category" id="bank" v-model="order.category" />
                   <label for="bank">Bank</label>
                 </p>
               </div>
@@ -47,11 +47,11 @@
               <p>Notification</p>
               <div class="col s12">
                 <p>
-                  <input class="with-gap" name="group" type="radio" id="sms" />
+                  <input type="radio" value="SMS" name="notification" id="sms" v-model="order.notification" />
                   <label for="sms">SMS</label>
                 </p>
                 <p>
-                  <input class="with-gap" name="group" type="radio" id="notif" />
+                  <input type="radio" value="Notification" name="notification" id="notif" v-model="order.notification" />
                   <label for="notif">Notification</label>
                 </p>
               </div>
@@ -67,3 +67,37 @@
       </div>
     </div>
 </template>
+
+<script>
+    export default {
+        data() {
+            return {
+                order: {
+                    category: null,
+                    fb_uid: null,
+                    flight_number: null,
+                    notification: null,
+                    phone_number: null
+                },
+                user: {
+                    name: null
+                }
+            }
+        },
+
+        methods: {
+            submit() {
+                this.$http.get(ai.api.url + 'getschedule', this.order).then(() => {
+                    alert('x')
+                }, () => {
+                    alert('Unable to save')
+                })
+            }
+        },
+
+        mounted() {
+            this.user.name = localStorage.getItem('userName')
+            this.order.fb_uid = localStorage.getItem('fbUid')
+        }
+    }
+</script>
