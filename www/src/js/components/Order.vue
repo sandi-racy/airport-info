@@ -7,6 +7,12 @@
       </div>
       <div class="sign-up">
         <div class="row">
+            <ul>
+                <li v-for="error in errors">{{ error }}</li>
+            </ul>
+        </div>
+
+        <div class="row">
           <form class="col s12" @submit.prevent="submit">
             <div class="sign-up__name">
               <h2>Hi, {{ user.name }}</h2>
@@ -26,7 +32,7 @@
               </div>
             </div>
             <div class="row">
-              <p>Categories</p>
+              <p>Category</p>
               <div class="col s12">
                 <p>
                   <input type="radio" value="1" name="category_id" id="transportation" v-model="order.category_id" />
@@ -72,6 +78,7 @@
     export default {
         data() {
             return {
+                errors: [],
                 order: {
                     category_id: null,
                     fb_uid: null,
@@ -90,7 +97,11 @@
                 this.$http.post(ai.api.url + 'getschedule', this.order).then((response) => {
                     let statusCode = response.body.status
                     if (statusCode == 200) {
+                        this.errors = []
+                        localStorage.setItem('viewOrder', 'yes')
                         this.$router.push('view')
+                    } else {
+                        this.errors = response.body.message
                     }
                 }, () => {
                     alert('Unable to save')
@@ -99,6 +110,11 @@
         },
 
         mounted() {
+            if (localStorage.getItem('viewOrder')) {
+                this.$router.push('view')
+                return null
+            }
+
             this.user.name = localStorage.getItem('userName')
             this.order.fb_uid = localStorage.getItem('fbUid')
         }
