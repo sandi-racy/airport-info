@@ -8,10 +8,12 @@ Vue.use(VueResource)
 import App from './components/App.vue'
 import Login from './components/Login.vue'
 import Order from './components/Order.vue'
+import View from './components/View.vue'
 
 const routes = [
 	{ path: '/', component: Login },
 	{ path: '/order', component: Order },
+	{ path: '/view', component: View }
 ]
 
 const router = new VueRouter({
