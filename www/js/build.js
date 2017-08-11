@@ -12275,10 +12275,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data() {
         return {
+            errors: [],
             order: {
                 category_id: null,
                 fb_uid: null,
@@ -12297,7 +12304,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.$http.post(ai.api.url + 'getschedule', this.order).then(response => {
                 let statusCode = response.body.status;
                 if (statusCode == 200) {
+                    this.errors = [];
+                    localStorage.setItem('viewOrder', 'yes');
                     this.$router.push('view');
+                } else {
+                    this.errors = response.body.message;
                 }
             }, () => {
                 alert('Unable to save');
@@ -12306,6 +12317,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     mounted() {
+        if (localStorage.getItem('viewOrder')) {
+            this.$router.push('view');
+            return null;
+        }
+
         this.user.name = localStorage.getItem('userName');
         this.order.fb_uid = localStorage.getItem('fbUid');
     }
@@ -12321,6 +12337,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "sign-up"
   }, [_c('div', {
+    staticClass: "row"
+  }, [_c('ul', _vm._l((_vm.errors), function(error) {
+    return _c('li', [_vm._v(_vm._s(error))])
+  }))]), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('form', {
     staticClass: "col s12",
@@ -12392,7 +12412,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Flight Number")])])]), _vm._v(" "), _c('div', {
     staticClass: "row"
-  }, [_c('p', [_vm._v("Categories")]), _vm._v(" "), _c('div', {
+  }, [_c('p', [_vm._v("Category")]), _vm._v(" "), _c('div', {
     staticClass: "col s12"
   }, [_c('p', [_c('input', {
     directives: [{
@@ -12983,6 +13003,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "hero__header"
   }, [_c('h1', [_vm._v("Airport Info")])])]), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col s6"
+  })]), _vm._v(" "), _c('div', {
     staticClass: "card--view"
   }, [_c('div', {
     staticClass: "profile-view"
@@ -12990,7 +13014,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "profile-view__image"
   }, [_c('span', [_vm._v("M")])]), _vm._v(" "), _c('div', {
     staticClass: "profile-view__content"
-  }, [_c('p', [_vm._v("Muslim Al Fatih")]), _vm._v(" "), _c('p', [_vm._v("Jakarta")])])])]), _vm._v(" "), _c('div', {
+  }, [_c('p', [_vm._v("Muslim Al Fatih")]), _vm._v(" "), _c('p', [_vm._v("Jakarta - Bandung")])])])]), _vm._v(" "), _c('div', {
     staticClass: "card--info"
   }, [_c('h3', [_vm._v("Personal Info")]), _vm._v(" "), _c('div', {
     staticClass: "card--info__name"
@@ -13000,7 +13024,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "card--info__category"
   }, [_c('dl', [_c('dt', [_vm._v("Category")]), _vm._v(" "), _c('dd', [_vm._v("Banking")])])]), _vm._v(" "), _c('div', {
     staticClass: "card--info__notification"
-  }, [_c('dl', [_c('dt', [_vm._v("Notification")]), _vm._v(" "), _c('dd', [_vm._v("SMS")])])])])])
+  }, [_c('dl', [_c('dt', [_vm._v("Notification")]), _vm._v(" "), _c('dd', [_vm._v("SMS")])])]), _vm._v(" "), _c('div', {
+    staticClass: "card--info__departure"
+  }, [_c('dl', [_c('dt', [_vm._v("Departure")]), _vm._v(" "), _c('dd', [_vm._v("13:15")])])]), _vm._v(" "), _c('div', {
+    staticClass: "card--info__arrival"
+  }, [_c('dl', [_c('dt', [_vm._v("Arrival")]), _vm._v(" "), _c('dd', [_vm._v("15:15")])])])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {

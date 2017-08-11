@@ -5,6 +5,9 @@
           <h1>Airport Info</h1>
         </div>
       </div>
+      <div class="row">
+        <div class="col s6"></div>
+      </div>
       <div class="card--view">
         <div class="profile-view">
           <div class="profile-view__image">
@@ -12,7 +15,7 @@
           </div>
           <div class="profile-view__content">
             <p>Muslim Al Fatih</p>
-            <p>Jakarta</p>
+            <p>Jakarta - Bandung</p>
           </div>
         </div>
       </div>
@@ -44,6 +47,20 @@
           <dl>
             <dt>Notification</dt>
             <dd>SMS</dd>
+          </dl>
+        </div>
+
+        <div class="card--info__departure">
+          <dl>
+            <dt>Departure</dt>
+            <dd>13:15</dd>
+          </dl>
+        </div>
+
+        <div class="card--info__arrival">
+          <dl>
+            <dt>Arrival</dt>
+            <dd>15:15</dd>
           </dl>
         </div>
 
