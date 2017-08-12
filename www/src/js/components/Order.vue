@@ -75,6 +75,10 @@
 </template>
 
 <style lang="scss">
+  .sign-up {
+    box-shadow: 0 2px 5px rgba(100, 100, 100, 0.175); 
+  }
+
   .form-validate {
     &__error {
       color: #f44336;

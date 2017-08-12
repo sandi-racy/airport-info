@@ -67,13 +67,23 @@
         <!-- <div class="card--info__edit">
           <p>Edit Details</p>
         </div> -->
+
+        <div class="order-page__button">
+          <button class="waves-effect waves-light blue btn"><i class="material-icons left"></i>Done</button>
+        </div>
       </div>
     </div>
 </template>
 
 <style lang="scss">
   .order-page {
-    padding-bottom: 40px
+    padding-bottom: 40px;
+
+    &__button {
+      display: block;
+      margin-bottom: 10px;
+      text-align: right;
+    }
   }
 
   .card {
