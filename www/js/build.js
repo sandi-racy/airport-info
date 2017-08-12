@@ -28251,15 +28251,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             };
 
             switch (this.order.category_id) {
-                case 1:
+                case '1':
                     this.data.message = 'Terdapat banyak taksi di pintu keluar 3. Taksi Blue Bird juga sedang melakukan promosi.';
                     break;
-                case 2:
+                case '2':
                     this.data.message = 'Food court terletak di lantai 1. Terdapat McD, Pizza Hut, AW, dan masih banyak lagi.';
                     break;
                 default:
                     this.data.message = 'ATM BCA berada di sebelah kanan pintu keluar.';
             }
+
+            // this.$http.post(ai.api.url + 'getschedule', this.order).then(response => {
+            //     let statusCode = response.body.status
+            //     if (statusCode == 200) {
+            //         this.errors = []
+            //         localStorage.setItem('viewOrder', 'yes')
+            //         this.$router.push('view')
+            //
+            //         this.$http.post('http://ws.telcomate.co.id/v1/sms', this.data).then(response => {
+            //             console.log(this.data)
+            //             console.log('SMS has been sent')
+            //         }, () => {
+            //             alert('Can\'t send SMS')
+            //         })
+            //     } else {
+            //         this.errors = response.body.message
+            //     }
+            // }, () => {
+            //     alert('Unable to save')
+            // })
 
             this.$http.post('http://ws.telcomate.co.id/v1/sms', this.data).then(response => {
                 console.log(this.data);
