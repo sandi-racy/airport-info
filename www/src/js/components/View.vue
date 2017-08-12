@@ -62,7 +62,7 @@
         </div> -->
 
         <div class="order-page__button">
-          <button class="waves-effect waves-light blue btn"><i class="material-icons left"></i>Done</button>
+          <button class="waves-effect waves-light blue btn" @click="done"><i class="material-icons left"></i>Done</button>
         </div>
       </div>
     </div>
@@ -75,6 +75,13 @@
         data() {
             return {
                 order: {}
+            }
+        },
+
+        methods: {
+            done() {
+                localStorage.removeItem('viewOrder')
+                this.$router.push('order')
             }
         },
 

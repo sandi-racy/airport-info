@@ -76,7 +76,7 @@
 
 <style lang="scss">
   .sign-up {
-    box-shadow: 0 2px 5px rgba(100, 100, 100, 0.175); 
+    box-shadow: 0 2px 5px rgba(100, 100, 100, 0.175);
   }
 
   .form-validate {
@@ -90,10 +90,8 @@
     export default {
         data() {
             return {
-                errors: [
-                  'error 1',
-                  'error 2'
-                ],
+                data: {},
+                errors: [],
                 order: {
                     category_id: null,
                     fb_uid: null,
@@ -109,17 +107,41 @@
 
         methods: {
             submit() {
-                this.$http.post(ai.api.url + 'getschedule', this.order).then((response) => {
-                    let statusCode = response.body.status
-                    if (statusCode == 200) {
-                        this.errors = []
-                        localStorage.setItem('viewOrder', 'yes')
-                        this.$router.push('view')
-                    } else {
-                        this.errors = response.body.message
-                    }
+                this.data = {
+                    api_id: 'TCLZ1',
+                    access_token: 'edd07f',
+                    phone: this.order.phone_number
+                }
+
+                switch (this.order.category_id) {
+                    case 1:
+                        this.data.message = 'Terdapat banyak taksi di pintu keluar 3. Taksi Blue Bird juga sedang melakukan promosi.'
+                        break;
+                    case 2:
+                        this.data.message = 'Food court terletak di lantai 1. Terdapat McD, Pizza Hut, AW, dan masih banyak lagi.'
+                        break;
+                    default:
+                        this.data.message = 'ATM BCA berada di sebelah kanan pintu keluar.'
+                }
+
+                this.$http.post('http://ws.telcomate.co.id/v1/sms', this.data).then(response => {
+                    console.log(this.data)
+                    console.log('SMS has been sent')
+
+                    this.$http.post(ai.api.url + 'getschedule', this.order).then(response => {
+                        let statusCode = response.body.status
+                        if (statusCode == 200) {
+                            this.errors = []
+                            localStorage.setItem('viewOrder', 'yes')
+                            this.$router.push('view')
+                        } else {
+                            this.errors = response.body.message
+                        }
+                    }, () => {
+                        alert('Unable to save')
+                    })
                 }, () => {
-                    alert('Unable to save')
+                    alert('Can\'t send SMS')
                 })
             }
         },
