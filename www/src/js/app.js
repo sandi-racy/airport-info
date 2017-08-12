@@ -22,7 +22,7 @@ const router = new VueRouter({
 
 window.ai = {
 	api: {
-		url: 'http://airport-info-backend.dev/'
+		url: 'http://telcomate.co.id:8079/'
 	}
 }
 

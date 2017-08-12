@@ -11,56 +11,49 @@
       <div class="card--view">
         <div class="profile-view">
           <div class="profile-view__image">
-            <span>M</span>
+            <span>{{ order.userName.charAt(0) }}</span>
           </div>
           <div class="profile-view__content">
-            <p>Muslim Al Fatih</p>
-            <p>Jakarta - Bandung</p>
+            <p>{{ order.userName }}</p>
+            <p>{{ order.station1_desc }} - {{ order.station2_desc }}</p>
           </div>
         </div>
       </div>
 
       <div class="card--info">
-        <h3>Personal Info</h3>
+        <h3>Order Info</h3>
         <div class="card--info__name">
           <dl>
             <dt>Name</dt>
-            <dd>Muslim Al Fatih</dd>
+            <dd>{{ order.userName }}</dd>
           </dl>
         </div>
 
         <div class="card--info__phone">
           <dl>
             <dt>Phone</dt>
-            <dd>082 272 222 222</dd>
+            <dd>{{ order.user.no_telp }}</dd>
           </dl>
         </div>
 
         <div class="card--info__category">
           <dl>
             <dt>Category</dt>
-            <dd>Banking</dd>
+            <dd>{{ order.category.name }}</dd>
           </dl>
         </div>
 
         <div class="card--info__notification">
           <dl>
             <dt>Notification</dt>
-            <dd>SMS</dd>
+            <dd>{{ order.notification }}</dd>
           </dl>
         </div>
 
         <div class="card--info__departure">
           <dl>
             <dt>Departure</dt>
-            <dd>13:15</dd>
-          </dl>
-        </div>
-
-        <div class="card--info__arrival">
-          <dl>
-            <dt>Arrival</dt>
-            <dd>15:15</dd>
+            <dd>{{ order.departure }}</dd>
           </dl>
         </div>
 
@@ -74,6 +67,28 @@
       </div>
     </div>
 </template>
+
+<script type="text/javascript">
+    import moment from 'moment'
+
+    export default {
+        data() {
+            return {
+                order: {}
+            }
+        },
+
+        mounted() {
+            this.$http.get(ai.api.url + 'getorder?fb_uid=' + localStorage.getItem('fbUid')).then((response) => {
+                this.order = response.body.order
+                this.order.userName = localStorage.getItem('userName')
+                this.order.departure = moment(this.order.estimated).format('MMMM Do YYYY, h:mm:ss a')
+            }, () => {
+                alert('Unable to get order data')
+            })
+        }
+    }
+</script>
 
 <style lang="scss">
   .order-page {
