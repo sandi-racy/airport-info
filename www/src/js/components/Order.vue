@@ -7,8 +7,8 @@
       </div>
       <div class="sign-up">
         <div class="row">
-            <ul>
-                <li v-for="error in errors">{{ error }}</li>
+            <ul class="form-validate">
+                <li v-for="error in errors" class="form-validate__error">{{ error }}</li>
             </ul>
         </div>
 
@@ -74,11 +74,22 @@
     </div>
 </template>
 
+<style lang="scss">
+  .form-validate {
+    &__error {
+      color: #f44336;
+    }
+  }
+</style>
+
 <script>
     export default {
         data() {
             return {
-                errors: [],
+                errors: [
+                  'error 1',
+                  'error 2'
+                ],
                 order: {
                     category_id: null,
                     fb_uid: null,

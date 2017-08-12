@@ -12164,13 +12164,17 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(23)
+}
 var Component = __webpack_require__(0)(
   /* script */
   __webpack_require__(14),
   /* template */
   __webpack_require__(15),
   /* styles */
-  null,
+  injectStyle,
   /* scopeId */
   null,
   /* moduleIdentifier (server only) */
@@ -12281,11 +12285,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data() {
         return {
-            errors: [],
+            errors: ['error 1', 'error 2'],
             order: {
                 category_id: null,
                 fb_uid: null,
@@ -12338,8 +12350,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "sign-up"
   }, [_c('div', {
     staticClass: "row"
-  }, [_c('ul', _vm._l((_vm.errors), function(error) {
-    return _c('li', [_vm._v(_vm._s(error))])
+  }, [_c('ul', {
+    staticClass: "form-validate"
+  }, _vm._l((_vm.errors), function(error) {
+    return _c('li', {
+      staticClass: "form-validate__error"
+    }, [_vm._v(_vm._s(error))])
   }))]), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('form', {
@@ -13037,6 +13053,46 @@ if (false) {
      require("vue-hot-reload-api").rerender("data-v-fe496aae", module.exports)
   }
 }
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(24);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(20)("512d4673", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-38ccaf0c\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Order.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-38ccaf0c\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Order.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(19)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n.form-validate__error {\n  color: #f44336;\n}\n", ""]);
+
+// exports
+
 
 /***/ })
 /******/ ]);
